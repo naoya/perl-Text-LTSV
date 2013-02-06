@@ -1,0 +1,25 @@
+---
+abstract: unknown
+author:
+  - 'Naoya Ito <i.naoya@gmail.com>'
+build_requires:
+  ExtUtils::MakeMaker: 6.36
+configure_requires:
+  ExtUtils::MakeMaker: 6.36
+dynamic_config: 0
+generated_by: 'Module::Install version 1.06, CPAN::Meta::Converter version 2.120921'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Text-LTSV
+no_index:
+  directory:
+    - inc
+    - t
+    - xt
+requires:
+  Path::Tiny: 0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.01
