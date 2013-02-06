@@ -15,7 +15,7 @@ sub new {
 sub parse_line {
     my ($class, $line) = @_;
     chomp $line;
-    return +{ map { split ':' } split "\t", $line }
+    return +{ map { split ':', $_, 2 } split "\t", $line };
 }
 
 sub parse_file {
