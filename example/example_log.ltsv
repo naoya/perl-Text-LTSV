@@ -1,0 +1,5 @@
+time:05/Feb/2013:15:34:47 +0000	host:192.168.50.1	req:GET / HTTP/1.1	status:304	size:0	referer:-	ua:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.58 Safari/537.22	reqtime:0.000	uprestime:-
+time:05/Feb/2013:15:34:47 +0000	host:192.168.50.1	req:GET /poweredby.png HTTP/1.1	status:304	size:0	referer:http://192.168.50.6/	ua:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.58 Safari/537.22	reqtime:0.000	uprestime:-
+time:05/Feb/2013:15:34:47 +0000	host:192.168.50.1	req:GET /nginx-logo.png HTTP/1.1	status:304	size:0	referer:http://192.168.50.6/	ua:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.58 Safari/537.22	reqtime:0.000	uprestime:-
+time:05/Feb/2013:15:34:47 +0000	host:192.168.50.1	req:GET /favicon.ico HTTP/1.1	status:404	size:3652	referer:-	ua:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.58 Safari/537.22	reqtime:0.000	uprestime:-
+time:05/Feb/2013:15:35:06 +0000	host:192.168.50.1	req:-	status:400	size:0	referer:-	ua:-	reqtime:0.000	uprestime:-

@@ -1,0 +1,25 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+use Project::Libs;
+use YAML::Tiny::Color qw/Dump/;
+use Text::LTSV;
+
+while (<>) {
+    my $hash = Text::LTSV->parse_line($_);
+    print Dump $hash;
+}
+
+__END__
+
+=head1 NAME
+
+ltsview - convert LTSV to colored YAML
+
+=head1 USAGE
+
+  ## in top of this module's direcotry
+  $ cat example/example_log.ltsv | perl example/ltsvie
+
+NOTE: You need to install L<YAML::Tiny::Color>
