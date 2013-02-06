@@ -68,7 +68,7 @@ Text::LTSV - Labeled Tab Separeted Value manipulator
     hoge => 'foo',
     bar  => 'baz',
   );
-  is $line, "hoge:foo\tbar:baz";
+  is $ltsv->to_s, "hoge:foo\tbar:baz";
 
 =head1 DESCRIPTION
 

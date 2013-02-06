@@ -1,5 +1,5 @@
 ---
-abstract: unknown
+abstract: 'Labeled Tab Separeted Value manipulator'
 author:
   - 'Naoya Ito <i.naoya@gmail.com>'
 build_requires:
@@ -18,8 +18,7 @@ no_index:
     - inc
     - t
     - xt
-requires:
-  Path::Tiny: 0
+requires: {}
 resources:
   license: http://dev.perl.org/licenses/
 version: 0.01

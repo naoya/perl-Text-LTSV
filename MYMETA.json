@@ -1,5 +1,5 @@
 {
-   "abstract" : "unknown",
+   "abstract" : "Labeled Tab Separeted Value manipulator",
    "author" : [
       "Naoya Ito <i.naoya@gmail.com>"
    ],
@@ -32,9 +32,7 @@
          }
       },
       "runtime" : {
-         "requires" : {
-            "Path::Tiny" : "0"
-         }
+         "requires" : {}
       }
    },
    "release_status" : "stable",
