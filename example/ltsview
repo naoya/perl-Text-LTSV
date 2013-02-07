@@ -11,13 +11,15 @@ my $opt = Getopt::Long::Parser->new(
     config => ['no_ignore_case', 'pass_through'],
 );
 $opt->getoptions(
-    'k|keys=s@' => \my @keys,
-    'o|ordered' => \my $ordered,
-    'no-color'   => \my $no_color,
+    'k|keys=s@'        => \my @keys,
+    'i|ignore-keys=s@' => \my @ignore,
+    'o|ordered'        => \my $ordered,
+    'no-color'         => \my $no_color,
 );
 
 my $p = Text::LTSV->new;
 $p->want_fields(map { split ',' } @keys) if @keys;
+$p->ignore_fields(map { split ',' } @ignore) if @ignore;
 
 # FIXME: This option does not work
 # so that YAML::Tiny::Color does not keep original order.
