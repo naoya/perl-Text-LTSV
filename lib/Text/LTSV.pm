@@ -103,7 +103,7 @@ __END__
 
 =head1 NAME
 
-Text::LTSV - Labeled Tab Separeted Value manipulator
+Text::LTSV - Labeled Tab Separated Value manipulator
 
 =head1 SYNOPSIS
 
@@ -132,7 +132,7 @@ Text::LTSV - Labeled Tab Separeted Value manipulator
 
 Labeled Tab Separated Value L<http://stanaka.hatenablog.com/entry/2013/02/05/214833> is a Key-Value pair + line-based text format for log files, especially HTTP access_log.
 
-This module provides a simple way to process LSTV-based string and files, which converts Key-Value pair(s) of LSTV to Perl's hash reference(s).
+This module provides a simple way to process LTSV-based string and files, which converts Key-Value pair(s) of LTSV to Perl's hash reference(s).
 
 =head1 AUTHOR
 
