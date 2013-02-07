@@ -18,7 +18,9 @@ no_index:
     - inc
     - t
     - xt
-requires: {}
+requires:
+  Tie::IxHash: 0
 resources:
   license: http://dev.perl.org/licenses/
+  repository: git://github.com/naoya/perl-Text-LTSV.git
 version: 0.01

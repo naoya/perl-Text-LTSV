@@ -32,14 +32,19 @@
          }
       },
       "runtime" : {
-         "requires" : {}
+         "requires" : {
+            "Tie::IxHash" : "0"
+         }
       }
    },
    "release_status" : "stable",
    "resources" : {
       "license" : [
          "http://dev.perl.org/licenses/"
-      ]
+      ],
+      "repository" : {
+         "url" : "git://github.com/naoya/perl-Text-LTSV.git"
+      }
    },
    "version" : "0.01"
 }

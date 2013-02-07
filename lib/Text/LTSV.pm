@@ -24,6 +24,11 @@ sub want_fields {
     return @{$self->{_wants}};
 }
 
+sub ordered {
+    my $self = shift;
+    @_ ? $self->{_ordered} = shift : return $self->{_ordered};
+}
+
 sub has_wants {
     @{shift->{_wants}} ? 1 : 0;
 }
@@ -38,14 +43,20 @@ sub parse_line {
         %wants = map { $_ => 1  } @{$self->{_wants}};
     }
 
-    my $kv = {};
+    my %kv;
+    if ($self->ordered) {
+        require Tie::IxHash;
+        tie %kv, 'Tie::IxHash';
+    }
     for (map { [ split ':', $_, 2 ] } split "\t", $line) {
         if ($has_wants and not $wants{$_->[0]}) {
             next;
         }
-        $kv->{$_->[0]} = $_->[1];
+        # $kv->{$_->[0]} = $_->[1];
+        $kv{$_->[0]} = $_->[1];
     }
-    return $kv;
+    # return $kv;
+    return \%kv;
 }
 
 sub parse_file {

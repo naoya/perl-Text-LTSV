@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 6;
+use Test::More tests => 7;
 
 use Text::LTSV;
 
@@ -20,4 +20,12 @@ use Text::LTSV;
     is $hash->{hoge}, 'foo';
     ok not exists $hash->{bar};
     is $hash->{time}, '20:30:58';
+}
+
+{
+    my $p = Text::LTSV->new;
+    $p->ordered(1);
+
+    my $hash = $p->parse_line("hoge:foo\tbar:baz\ttime:20:30:58\n");
+    is_deeply [qw/hoge bar time/], [ keys %$hash ];
 }
