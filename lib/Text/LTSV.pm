@@ -11,9 +11,15 @@ sub new {
     my ($self, @kv) = @_;
     # bless \@kv, $self;
     return bless {
-        _kv     => \@kv,
-        _wants  => [],
+        _kv      => \@kv,
+        _wants   => [],
+        _ignores => [],
     }, $self;
+}
+
+sub ignore_fields {
+    my ($self, @keys) = @_;
+    @keys ? $self->{_ignores} = \@keys :  return $self->{_ignores};
 }
 
 sub want_fields {
@@ -27,17 +33,27 @@ sub ordered {
 }
 
 sub has_wants {
-    @{shift->{_wants}} ? 1 : 0;
+    @{shift->want_fields} ? 1 : 0;
+}
+
+sub has_ignores {
+    @{shift->ignore_fields} ? 1 : 0;
 }
 
 sub parse_line {
     my ($self, $line) = @_;
     chomp $line;
-    my $has_wants = $self->has_wants;
+    my $has_wants   = $self->has_wants;
+    my $has_ignores = $self->has_ignores;
 
     my %wants;
     if ($has_wants) {
-        %wants = map { $_ => 1  } @{$self->{_wants}};
+        %wants = map { $_ => 1  } @{$self->want_fields};
+    }
+
+    my %ignores;
+    if ($has_ignores) {
+        %ignores = map { $_ => 1  } @{$self->ignore_fields};
     }
 
     my %kv;
@@ -46,13 +62,10 @@ sub parse_line {
         tie %kv, 'Tie::IxHash';
     }
     for (map { [ split ':', $_, 2 ] } split "\t", $line) {
-        if ($has_wants and not $wants{$_->[0]}) {
-            next;
-        }
-        # $kv->{$_->[0]} = $_->[1];
+        next if $has_ignores and $ignores{$_->[0]};
+        next if $has_wants and not $wants{$_->[0]};
         $kv{$_->[0]} = $_->[1];
     }
-    # return $kv;
     return \%kv;
 }
 
