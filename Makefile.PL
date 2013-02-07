@@ -3,8 +3,8 @@ name 'Text-LTSV';
 all_from 'lib/Text/LTSV.pm';
 
 requires 'Tie::IxHash';
-requires 'Project::Libs'
-requires 'UNIVERSAL::require'
+requires 'Project::Libs';
+requires 'UNIVERSAL::require';
 
 tests 't/*.t';
 author_tests 'xt';
