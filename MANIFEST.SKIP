@@ -19,3 +19,6 @@
 ^\.shipit$
 ^\.git/
 \.sw[po]$
+^carton.lock$
+^local/
+^.carton/
