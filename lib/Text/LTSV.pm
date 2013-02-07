@@ -8,39 +8,70 @@ use IO::File;
 use Carp qw/croak/;
 
 sub new {
-    my ($class, @kv) = @_;
-    bless \@kv, $class;
+    my ($self, @kv) = @_;
+    # bless \@kv, $self;
+    return bless {
+        _kv     => \@kv,
+        _wants  => [],
+    }, $self;
+}
+
+sub want_fields {
+    my ($self, @keys) = @_;
+    if (@keys) {
+        $self->{_wants} = \@keys;
+    }
+    return @{$self->{_wants}};
+}
+
+sub has_wants {
+    @{shift->{_wants}} ? 1 : 0;
 }
 
 sub parse_line {
-    my ($class, $line) = @_;
+    my ($self, $line) = @_;
     chomp $line;
-    return +{ map { split ':', $_, 2 } split "\t", $line };
+    my $has_wants = $self->has_wants;
+
+    my %wants;
+    if ($has_wants) {
+        %wants = map { $_ => 1  } @{$self->{_wants}};
+    }
+
+    my $kv = {};
+    for (map { [ split ':', $_, 2 ] } split "\t", $line) {
+        if ($has_wants and not $wants{$_->[0]}) {
+            next;
+        }
+        $kv->{$_->[0]} = $_->[1];
+    }
+    return $kv;
 }
 
 sub parse_file {
-    my ($class, $path, $opt) = @_;
+    my ($self, $path, $opt) = @_;
     $opt ||= {};
     my $fh = IO::File->new($path, $opt->{utf8} ? '<:utf8' : 'r') or croak $!;
     my @out;
     while (my $line = $fh->getline) {
-        push @out, $class->parse_line($line);
+        push @out, $self->parse_line($line);
     }
     $fh->close;
     return \@out;
 }
 
 sub parse_file_utf8 {
-    my ($class, $path) = @_;
-    return $class->parse_file($path, { utf8 => 1 });
+    my ($self, $path) = @_;
+    return $self->parse_file($path, { utf8 => 1 });
 }
 
 sub to_s {
     my $self = shift;
-    my $n = @$self;
+    my $n = @{$self->{_kv}};
     my @out;
+
     for (my $i = 0; $i < $n; $i += 2) {
-        push @out, join ':', $self->[$i], $self->[$i+1];
+        push @out, join ':', $self->{_kv}->[$i], $self->{_kv}->[$i+1];
     }
     return join "\t", @out;
 }
@@ -56,13 +87,19 @@ Text::LTSV - Labeled Tab Separeted Value manipulator
 =head1 SYNOPSIS
 
   use Text::LTSV;
-  my $hash = Text::LTSV->parse_line("hoge:foo\tbar:baz\n");
+  my $p = Text::LTSV->new;
+  my $hash = $p->parse_line("hoge:foo\tbar:baz\n");
   is $hash->{hoge}, 'foo';
   is $hash->{bar},  'baz';
 
-  my $data = Text::LTSV->parse_file('./t/test.ltsv'); # or parse_file_utf8
+  my $data = $p->parse_file('./t/test.ltsv'); # or parse_file_utf8
   is $data->[0]->{hoge}, 'foo';
   is $data->[0]->{bar}, 'baz';
+
+  # Only want certain fields?
+  my $p = Text::LTSV->new;
+  $p->want_fields('hoge');
+  $p->parse_line("hoge:foo\tbar:baz\n");
 
   my $ltsv = Text::LTSV->new(
     hoge => 'foo',

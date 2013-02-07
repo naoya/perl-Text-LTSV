@@ -12,5 +12,7 @@ my $ltsv = Text::LTSV->new(
 my $line = $ltsv->to_s;
 
 is $line, "hoge:foo\tbar:baz";
-is(Text::LTSV->parse_line($line)->{hoge}, 'foo');
-is(Text::LTSV->parse_line($line)->{bar}, 'baz');
+
+my $p = Text::LTSV->new;
+is($p->parse_line($line)->{hoge}, 'foo');
+is($p->parse_line($line)->{bar}, 'baz');
