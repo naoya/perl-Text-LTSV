@@ -5,9 +5,22 @@ use warnings;
 use Project::Libs;
 use YAML::Tiny::Color qw/Dump/;
 use Text::LTSV;
+use Getopt::Long;
+
+my $opt = Getopt::Long::Parser->new(
+    config => ['no_ignore_case', 'pass_through'],
+);
+$opt->getoptions(
+    'k|keys=s@' => \my @keys,
+);
+
+my $p = Text::LTSV->new;
+if (@keys) {
+    $p->want_fields(map { split ',' } @keys);
+}
 
 while (<>) {
-    my $hash = Text::LTSV->parse_line($_);
+    my $hash = $p->parse_line($_);
     print Dump $hash;
 }
 
