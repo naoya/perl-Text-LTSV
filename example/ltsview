@@ -12,12 +12,15 @@ my $opt = Getopt::Long::Parser->new(
 );
 $opt->getoptions(
     'k|keys=s@' => \my @keys,
+    'o|ordered' => \my $ordered,
 );
 
 my $p = Text::LTSV->new;
-if (@keys) {
-    $p->want_fields(map { split ',' } @keys);
-}
+$p->want_fields(map { split ',' } @keys) if @keys;
+
+# FIXME: This option does not work
+# so that YAML::Tiny::Color does not keep original order.
+$p->ordered(1) if $ordered;
 
 while (<>) {
     my $hash = $p->parse_line($_);
