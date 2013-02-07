@@ -3,6 +3,7 @@ use Test::More tests => 5;
 
 use utf8;
 use Text::LTSV;
+use Errno ();
 
 my $p = Text::LTSV->new;
 
@@ -13,4 +14,4 @@ is $data->[1]->{perl}, '5.17.8';
 is $data->[2]->{tennpura}, '天ぷら';
 
 eval { $p->parse_file('./t/not_found') };
-like $@, qr/No such file or directory/;
+ok $! == Errno::ENOENT;
