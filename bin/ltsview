@@ -45,6 +45,6 @@ ltsview - convert LTSV to colored YAML
 =head1 USAGE
 
   ## in top of this module's direcotry
-  $ cat example/example_log.ltsv | perl example/ltsvie
+  $ cat example/example_log.ltsv | perl bin/ltsview -k ua,req,time
 
 NOTE: You need to install L<YAML::Tiny::Color>
