@@ -12,3 +12,5 @@ MANIFEST.bak
 .carton
 local/
 carton.lock
+MYMETA.json
+MYMETA.yml

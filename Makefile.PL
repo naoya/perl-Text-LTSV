@@ -5,6 +5,7 @@ all_from 'lib/Text/LTSV.pm';
 requires 'Tie::IxHash';
 requires 'Project::Libs';
 requires 'UNIVERSAL::require';
+requires 'YAML::Tiny::Color';
 
 tests 't/*.t';
 author_tests 'xt';

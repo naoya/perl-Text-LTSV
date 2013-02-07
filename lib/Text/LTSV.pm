@@ -122,6 +122,11 @@ Text::LTSV - Labeled Tab Separated Value manipulator
   $p->want_fields('hoge');
   $p->parse_line("hoge:foo\tbar:baz\n");
 
+  # Vise versa
+  my $p = Text::LTSV->new;
+  $p->ignore_fields('hoge');
+  $p->parse_line("hoge:foo\tbar:baz\n");
+
   my $ltsv = Text::LTSV->new(
     hoge => 'foo',
     bar  => 'baz',
@@ -130,9 +135,18 @@ Text::LTSV - Labeled Tab Separated Value manipulator
 
 =head1 DESCRIPTION
 
-Labeled Tab Separated Value L<http://stanaka.hatenablog.com/entry/2013/02/05/214833> is a Key-Value pair + line-based text format for log files, especially HTTP access_log.
+Labeled Tab-separated Values (LTSV) format is a variant of
+Tab-separated Values (TSV). Each record in a LTSV file is represented
+as a single line. Each field is separated by TAB and has a label and a
+value. The label and the value have been separated by ':'.
 
-This module provides a simple way to process LTSV-based string and files, which converts Key-Value pair(s) of LTSV to Perl's hash reference(s).
+cf: L<http://ltsv.org/>
+
+This format is useful for log files, especially HTTP access_log.
+
+This module provides a simple way to process LTSV-based string and
+files, which converts Key-Value pair(s) of LTSV to Perl's hash
+reference(s).
 
 =head1 AUTHOR
 

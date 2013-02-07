@@ -1,6 +1,12 @@
 Revision history for Perl extension Text::LTSV
 
+0.04    Wed Feb  7
+        - merged pull requests #1 (a2ikm) and #2 (syohex)
+        - added module requiements to UNIVERSAL::require, Project::Libs, YAML::Tiny::Color
+        - updated document
+
 0.03    Wed Feb  7
+        - Ship It!
 
 0.01    Wed Feb  6 17:32:10 2013
         - original version
