@@ -18,10 +18,7 @@ sub new {
 
 sub want_fields {
     my ($self, @keys) = @_;
-    if (@keys) {
-        $self->{_wants} = \@keys;
-    }
-    return @{$self->{_wants}};
+    @keys ? $self->{_wants} = \@keys :  return $self->{_wants};
 }
 
 sub ordered {
