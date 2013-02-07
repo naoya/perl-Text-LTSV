@@ -3,9 +3,9 @@ use strict;
 use warnings;
 
 use Project::Libs;
-use YAML::Tiny::Color qw/Dump/;
 use Text::LTSV;
 use Getopt::Long;
+use UNIVERSAL::require;
 
 my $opt = Getopt::Long::Parser->new(
     config => ['no_ignore_case', 'pass_through'],
@@ -13,6 +13,7 @@ my $opt = Getopt::Long::Parser->new(
 $opt->getoptions(
     'k|keys=s@' => \my @keys,
     'o|ordered' => \my $ordered,
+    'no-color'   => \my $no_color,
 );
 
 my $p = Text::LTSV->new;
@@ -22,9 +23,15 @@ $p->want_fields(map { split ',' } @keys) if @keys;
 # so that YAML::Tiny::Color does not keep original order.
 $p->ordered(1) if $ordered;
 
+my $dumper = sub {
+    my $module = $no_color ? 'YAML::Tiny' : 'YAML::Tiny::Color';
+    $module->require or die $@;
+    my $method = \&{$module . "::Dump"};
+    $method->(shift);
+};
+
 while (<>) {
-    my $hash = $p->parse_line($_);
-    print Dump $hash;
+    print $dumper->( $p->parse_line($_) );
 }
 
 __END__
