@@ -1,6 +1,7 @@
 use inc::Module::Install;
 name 'Text-LTSV';
 all_from 'lib/Text/LTSV.pm';
+readme_from 'lib/Text/LTSV.pm';
 
 requires 'Tie::IxHash';
 requires 'Project::Libs';
