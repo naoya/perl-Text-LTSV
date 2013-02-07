@@ -6,6 +6,7 @@ our $VERSION = '0.04';
 
 use IO::File;
 use Carp qw/croak/;
+use Text::LTSV::Iterator;
 
 sub new {
     my ($self, @kv) = @_;
@@ -86,6 +87,18 @@ sub parse_file_utf8 {
     return $self->parse_file($path, { utf8 => 1 });
 }
 
+sub parse_file_iter {
+    my ($self, $path, $opt) = @_;
+    $opt ||= {};
+    my $fh = IO::File->new($path, $opt->{utf8} ? '<:utf8' : 'r') or croak $!;
+    return Text::LTSV::Iterator->new($self, $fh);
+}
+
+sub parse_file_iter_utf8 {
+    my ($self, $path) = @_;
+    return $self->parse_file_iter($path, { utf8 => 1 });
+}
+
 sub to_s {
     my $self = shift;
     my $n = @{$self->{_kv}};
@@ -116,6 +129,14 @@ Text::LTSV - Labeled Tab Separated Value manipulator
   my $data = $p->parse_file('./t/test.ltsv'); # or parse_file_utf8
   is $data->[0]->{hoge}, 'foo';
   is $data->[0]->{bar}, 'baz';
+
+  # Iterator interface
+  my $it = $p->parse_file_iter('./t/test.ltsv'); # or parse_file_iter_utf8
+  while ($it->has_next) {
+      my $hash = $it->next;
+      ...
+  }
+  $it->end;
 
   # Only want certain fields?
   my $p = Text::LTSV->new;
