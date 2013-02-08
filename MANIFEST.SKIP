@@ -22,3 +22,5 @@
 ^carton.lock$
 ^local/
 ^.carton/
+^MYMETA.json$
+^MYMETA.yml$

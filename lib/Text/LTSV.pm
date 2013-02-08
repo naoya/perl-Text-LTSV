@@ -2,7 +2,7 @@ package Text::LTSV;
 use strict;
 use warnings;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 use IO::File;
 use Carp qw/croak/;
