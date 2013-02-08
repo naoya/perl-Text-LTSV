@@ -1,5 +1,8 @@
 Revision history for Perl extension Text::LTSV
 
+0.05    Wed Feb  8
+        - add File Iterator interface ($parser->parse_file_iter, parse_file_iter_utf8)
+
 0.04    Wed Feb  7
         - merged pull requests #1 (a2ikm) and #2 (syohex)
         - added module requiements to UNIVERSAL::require, Project::Libs, YAML::Tiny::Color
