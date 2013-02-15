@@ -16,6 +16,7 @@ $opt->getoptions(
     'o|ordered'        => \my $ordered,
     'no-color'         => \my $no_color,
     'j|json'           => \my $use_json,
+    't|tag=s'            => \my $tag,
 );
 
 my $p = Text::LTSV->new;
@@ -40,7 +41,11 @@ my $dumper = sub {
 };
 
 while (<>) {
-    print $dumper->( $p->parse_line($_) );
+    my $out = $dumper->( $p->parse_line($_) );
+    if ($tag) {
+        $out = sprintf "@[%s] %s", $tag, $out;
+    }
+    print $out;
 }
 
 __END__
