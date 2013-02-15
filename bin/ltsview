@@ -15,6 +15,7 @@ $opt->getoptions(
     'i|ignore-keys=s@' => \my @ignore,
     'o|ordered'        => \my $ordered,
     'no-color'         => \my $no_color,
+    'j|json'           => \my $use_json,
 );
 
 my $p = Text::LTSV->new;
@@ -26,10 +27,16 @@ $p->ignore_fields(map { split ',' } @ignore) if @ignore;
 $p->ordered(1) if $ordered;
 
 my $dumper = sub {
-    my $module = $no_color ? 'YAML::Tiny' : 'YAML::Tiny::Color';
-    $module->require or die $@;
-    my $method = \&{$module . "::Dump"};
-    $method->(shift);
+    if ($use_json) {
+        JSON->require or die $@;
+        my $json = JSON->new;
+        $json->encode(shift) . "\n";
+    } else {
+        my $module = $no_color ? 'YAML::Tiny' : 'YAML::Tiny::Color';
+        $module->require or die $@;
+        my $method = \&{$module . "::Dump"};
+        $method->(shift);
+    }
 };
 
 while (<>) {
