@@ -8,6 +8,7 @@ before_install:
   - cpanm Module::Install::Repository
   - cpanm Module::Install::ReadmeFromPod
   - cpanm Module::Install::CPANfile
+  - cpanm Module::Install::AuthorTests
 notifications:
   email:
     - i.naoya+travis@gmail.com

@@ -1,0 +1,71 @@
+{
+   "abstract" : "Labeled Tab Separated Value manipulator",
+   "author" : [
+      "Naoya Ito <i.naoya@gmail.com>"
+   ],
+   "dynamic_config" : "0",
+   "generated_by" : "Module::Install version 1.06, CPAN::Meta::Converter version 2.120921",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Text-LTSV",
+   "no_index" : {
+      "directory" : [
+         "example",
+         "inc",
+         "t",
+         "xt"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.36"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "CPAN::Meta" : "0",
+            "ExtUtils::MakeMaker" : "6.36"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Project::Libs" : "0",
+            "Tie::IxHash" : "0",
+            "UNIVERSAL::require" : "0",
+            "YAML::Tiny::Color" : "0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::More" : "0"
+         }
+      }
+   },
+   "provides" : {
+      "Text::LTSV" : {
+         "file" : "lib/Text/LTSV.pm",
+         "version" : "0.07"
+      },
+      "Text::LTSV::Iterator" : {
+         "file" : "lib/Text/LTSV/Iterator.pm",
+         "version" : "0"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ],
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/naoya/perl-Text-LTSV.git"
+      }
+   },
+   "version" : "0.07"
+}
