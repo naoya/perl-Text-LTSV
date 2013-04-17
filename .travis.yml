@@ -1,0 +1,14 @@
+language: perl
+perl:
+  - "5.16"
+  - "5.14"
+  - "5.12"
+before_install:
+  - cpanm Module::Install::Repository
+  - cpanm Module::Install::ReadmeFromPod
+  - cpanm Module::Install::CPANfile
+notifications:
+  email:
+    - i.naoya+travis@gmail.com
+#  irc:
+#    - "irc.freenode.net#md2inao"
