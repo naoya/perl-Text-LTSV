@@ -11,5 +11,3 @@ before_install:
 notifications:
   email:
     - i.naoya+travis@gmail.com
-#  irc:
-#    - "irc.freenode.net#md2inao"
