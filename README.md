@@ -1,7 +1,7 @@
 Text::LTSV
 =======
 
-[![Build Status](https://travis-ci.org/naoya/perl-Text-LTSV.png?branch=master)](https://travis-ci.org/naoya/perl-Text-LTSV)
+[![Build Status](https://travis-ci.org/naoya/perl-Text-LTSV.png?branch=master)](https://travis-ci.org/naoya/perl-Text-LTSV) [![Coverage Status](https://coveralls.io/repos/naoya/perl-Text-LTSV/badge.png?branch=master)](https://coveralls.io/r/naoya/perl-Text-LTSV)
 
 NAME
 -----
