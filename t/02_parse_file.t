@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 13;
+use Test::More tests => 23;
 
 use utf8;
 use Text::LTSV;
@@ -19,6 +19,13 @@ my $p = Text::LTSV->new;
 }
 
 {
+    my $data1 = $p->parse_file_utf8('./t/test.ltsv');
+    my $data2 = Text::LTSV->parse_file_utf8('./t/test.ltsv');
+    is_deeply $data2->[0], $data1->[0];
+    is_deeply $data2->[1], $data1->[1];
+}
+
+{
     my $it = $p->parse_file_iter_utf8('./t/test.ltsv');
 
     ok $it->has_next;
@@ -35,4 +42,27 @@ my $p = Text::LTSV->new;
 
     ok not $it->has_next;
     ok $it->end;
+}
+
+{
+    my $it1 = $p->parse_file_iter_utf8('./t/test.ltsv');
+    my $it2 = Text::LTSV->parse_file_iter_utf8('./t/test.ltsv');
+
+    ok $it1->has_next && $it2->has_next;
+    my $hash1 = $it1->next;
+    my $hash2 = $it2->next;
+    is $hash2->{hoge}, $hash1->{hoge};
+
+    ok $it1->has_next && $it2->has_next;
+    $hash1 = $it1->next;
+    $hash2 = $it2->next;
+    is $hash2->{ruby}, $hash1->{ruby};
+
+    ok $it1->has_next && $it2->has_next;
+    $hash1 = $it1->next;
+    $hash2 = $it2->next;
+    is $hash2->{tennpura}, $hash1->{tennpura};
+
+    ok (not $it1->has_next and not $it2->has_next);
+    ok $it1->end && $it2->end;
 }

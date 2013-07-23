@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 10;
+use Test::More tests => 11;
 
 use Text::LTSV;
 
@@ -11,6 +11,13 @@ use Text::LTSV;
     is $hash->{time}, '20:30:58';
 }
 
+{
+    my $p = Text::LTSV->new;
+    my $hash1 = $p->parse_line("hoge:foo\tbar:baz\ttime:20:30:58\n");
+
+    my $hash2 = Text::LTSV->parse_line("hoge:foo\tbar:baz\ttime:20:30:58\n");
+    is_deeply $hash2, $hash1
+}
 
 {
     my $p = Text::LTSV->new;
