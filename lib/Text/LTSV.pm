@@ -44,8 +44,8 @@ sub has_ignores {
 sub parse_line {
     my ($self, $line) = @_;
     chomp $line;
-    my $has_wants   = $self->has_wants;
-    my $has_ignores = $self->has_ignores;
+    my $has_wants   = ref $self ? $self->has_wants : undef;
+    my $has_ignores = ref $self ? $self->has_ignores : undef;
 
     my %wants;
     if ($has_wants) {
@@ -58,7 +58,7 @@ sub parse_line {
     }
 
     my %kv;
-    if ($self->ordered) {
+    if (ref $self and $self->ordered) {
         require Tie::IxHash;
         tie %kv, 'Tie::IxHash';
     }
@@ -72,6 +72,7 @@ sub parse_line {
 
 sub parse_file {
     my ($self, $path, $opt) = @_;
+    $self = $self->new unless ref $self;
     $opt ||= {};
     my $fh = IO::File->new($path, $opt->{utf8} ? '<:utf8' : 'r') or croak $!;
     my @out;
@@ -89,6 +90,7 @@ sub parse_file_utf8 {
 
 sub parse_file_iter {
     my ($self, $path, $opt) = @_;
+    $self = $self->new unless ref $self;
     $opt ||= {};
     my $fh = IO::File->new($path, $opt->{utf8} ? '<:utf8' : 'r') or croak $!;
     return Text::LTSV::Iterator->new($self, $fh);
