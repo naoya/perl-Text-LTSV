@@ -1,5 +1,11 @@
 Revision history for Perl extension Text::LTSV
 
+0.08    Fri Jan 24, 2014
+        - Merged pull request #4 (monizon)
+        - Merged pull request #3 (tagomoris)
+        - Accept to receive filehandle as argument of methods (monizon)
+        - Fix parser to work well without any instanciation (tagomoris)
+
 0.07    Wed Feb  16
         - [ltsview] add -t option which add tag for stdout-hook <https://github.com/treasure-data/stdout-hook>
 

@@ -15,4 +15,8 @@ on configure => sub {
 
 on develop => sub {
     requires 'Test::Perl::Critic';
+    requires 'Module::Install';
+    requires 'Module::Install::CPANfile';
+    requires 'Module::Install::AuthorTests';
+    requires 'Module::Install::Repository';
 };

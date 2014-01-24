@@ -13,7 +13,10 @@ MANIFEST.bak
 local/
 carton.lock
 MYMETA.json
-MYMETA.yml### /Users/naoya/.gitignore-boilerplates/Global/OSX.gitignore
+MYMETA.yml
+cpanfile.snapshot
+
+### /Users/naoya/.gitignore-boilerplates/Global/OSX.gitignore
 
 .DS_Store
 .AppleDouble
