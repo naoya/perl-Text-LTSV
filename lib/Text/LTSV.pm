@@ -124,7 +124,8 @@ sub _open {
 
         return $fh;
     }
-    return IO::File->new($file, $opt->{utf8} ? '<:utf8' : 'r') or croak $!;
+    my $iofile = IO::File->new($file, $opt->{utf8} ? '<:utf8' : 'r') or croak $!;
+    return $iofile;
 }
 
 1;
